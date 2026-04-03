@@ -30,6 +30,9 @@ class TransactionType(str, Enum):
     BUS_BOOKING = "bus_booking"
     TRAVEL_BOOKING = "travel_booking"
     DIGITAL_RUPEE = "digital_rupee"
+    DEMAT_ACCOUNT = "demat_account"
+    MUTUAL_FUND = "mutual_fund"
+    PAN_CARD = "pan_card"
 
 class TransactionStatus(str, Enum):
     PENDING = "pending"
@@ -193,6 +196,46 @@ class TravelBookingRequest(BaseModel):
     user_id: str
     booking_type: str  # "flight", "hotel", "package"
     travel_details: Dict[str, Any]
+
+class TravelBookingRequest(BaseModel):
+    user_id: str
+    booking_type: str  # "flight", "hotel", "package"
+    travel_details: Dict[str, Any]
+
+class DematAccountRequest(BaseModel):
+    user_id: str
+    full_name: str
+    pan_number: str
+    email: str
+    phone: str
+    bank_account: str
+    ifsc: str
+    nominee_name: Optional[str] = None
+
+class MutualFundRequest(BaseModel):
+    user_id: str
+    fund_name: str
+    fund_code: str
+    amount: float
+    transaction_type: str  # "buy", "sell", "sip"
+    folio_number: Optional[str] = None
+
+class DigitalRupeeRequest(BaseModel):
+    user_id: str
+    transaction_type: str  # "load", "spend", "transfer"
+    amount: float
+    recipient_vpa: Optional[str] = None
+
+class PANCardRequest(BaseModel):
+    user_id: str
+    full_name: str
+    father_name: str
+    dob: str
+    email: str
+    phone: str
+    address: str
+    aadhaar_number: str
+    application_type: str  # "new", "reprint"
 
 # Shop/Location Models
 class Shop(BaseModel):

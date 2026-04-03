@@ -16,6 +16,7 @@ from models import (
     Wallet, WalletResponse, Transaction, TransactionResponse,
     WalletTopupRequest, WalletTransferRequest, TransactionStatus, TransactionType,
     AEPSRequest, DMTRequest, BBPSRequest, IRCTCBookingRequest, BusBookingRequest, TravelBookingRequest,
+    DematAccountRequest, MutualFundRequest, DigitalRupeeRequest, PANCardRequest,
     Shop, ShopVisit, Commission, ServiceResponse
 )
 from auth import (
@@ -504,6 +505,188 @@ async def travel_booking(request: TravelBookingRequest, current_user: dict = Dep
         )
     except Exception as e:
         logger.error(f"Travel booking error: {str(e)}")
+        return ServiceResponse(success=False, message=str(e))
+
+@api_router.post("/services/travel", response_model=ServiceResponse)
+async def travel_booking(request: TravelBookingRequest, current_user: dict = Depends(get_current_user)):
+    """Travel Booking (TBO Holidays integration point)"""
+    try:
+        # TODO: Integrate with TBO Holidays API
+        logger.info(f"[MOCK] Travel Booking: {request.booking_type}")
+        
+        transaction = Transaction(
+            user_id=request.user_id,
+            wallet_id="system",
+            type=TransactionType.TRAVEL_BOOKING,
+            amount=10000.00,  # Mock amount
+            status=TransactionStatus.SUCCESS,
+            description=f"{request.booking_type} booking",
+            metadata=request.travel_details
+        )
+        
+        await db.transactions.insert_one(transaction.dict())
+        
+        return ServiceResponse(
+            success=True,
+            message=f"{request.booking_type} booking completed successfully",
+            transaction_id=transaction.transaction_id,
+            data={"booking_type": request.booking_type, "booking_id": f"TRV{uuid.uuid4().hex[:10].upper()}"}
+        )
+    except Exception as e:
+        logger.error(f"Travel booking error: {str(e)}")
+        return ServiceResponse(success=False, message=str(e))
+
+@api_router.post("/services/demat", response_model=ServiceResponse)
+async def demat_account_opening(request: DematAccountRequest, current_user: dict = Depends(get_current_user)):
+    """Demat Account Opening (Integration point for CDSL/NSDL)"""
+    try:
+        # TODO: Integrate with Demat account provider API (e.g., Zerodha, Upstox, etc.)
+        logger.info(f"[MOCK] Demat Account Opening: {request.full_name}")
+        
+        transaction = Transaction(
+            user_id=request.user_id,
+            wallet_id="system",
+            type=TransactionType.DEMAT_ACCOUNT,
+            amount=299.00,  # Account opening fee
+            status=TransactionStatus.SUCCESS,
+            description="Demat account opening",
+            metadata={
+                "full_name": request.full_name,
+                "pan_number": request.pan_number,
+                "email": request.email,
+                "phone": request.phone
+            }
+        )
+        
+        await db.transactions.insert_one(transaction.dict())
+        
+        return ServiceResponse(
+            success=True,
+            message="Demat account application submitted successfully",
+            transaction_id=transaction.transaction_id,
+            data={
+                "application_id": f"DEMAT{uuid.uuid4().hex[:10].upper()}",
+                "account_type": "Trading + Demat",
+                "status": "under_verification"
+            }
+        )
+    except Exception as e:
+        logger.error(f"Demat account error: {str(e)}")
+        return ServiceResponse(success=False, message=str(e))
+
+@api_router.post("/services/mutual-fund", response_model=ServiceResponse)
+async def mutual_fund_transaction(request: MutualFundRequest, current_user: dict = Depends(get_current_user)):
+    """Mutual Fund Investment (Integration point for MF distributors)"""
+    try:
+        # TODO: Integrate with MF platform API (BSE Star, NSE, AMC APIs)
+        logger.info(f"[MOCK] Mutual Fund {request.transaction_type}: {request.fund_name}")
+        
+        transaction = Transaction(
+            user_id=request.user_id,
+            wallet_id="system",
+            type=TransactionType.MUTUAL_FUND,
+            amount=request.amount,
+            status=TransactionStatus.SUCCESS,
+            description=f"Mutual Fund {request.transaction_type} - {request.fund_name}",
+            metadata={
+                "fund_name": request.fund_name,
+                "fund_code": request.fund_code,
+                "transaction_type": request.transaction_type,
+                "folio_number": request.folio_number
+            }
+        )
+        
+        await db.transactions.insert_one(transaction.dict())
+        
+        return ServiceResponse(
+            success=True,
+            message=f"Mutual fund {request.transaction_type} order placed successfully",
+            transaction_id=transaction.transaction_id,
+            data={
+                "fund_name": request.fund_name,
+                "units": round(request.amount / 150.50, 4),  # Mock NAV
+                "folio_number": request.folio_number or f"FOL{uuid.uuid4().hex[:8].upper()}",
+                "order_status": "pending"
+            }
+        )
+    except Exception as e:
+        logger.error(f"Mutual fund error: {str(e)}")
+        return ServiceResponse(success=False, message=str(e))
+
+@api_router.post("/services/digital-rupee", response_model=ServiceResponse)
+async def digital_rupee_transaction(request: DigitalRupeeRequest, current_user: dict = Depends(get_current_user)):
+    """Digital e-Rupee (CBDC) transactions"""
+    try:
+        # TODO: Integrate with RBI Digital Rupee API (when available)
+        logger.info(f"[MOCK] Digital Rupee {request.transaction_type}: \u20b9{request.amount}")
+        
+        transaction = Transaction(
+            user_id=request.user_id,
+            wallet_id="system",
+            type=TransactionType.DIGITAL_RUPEE,
+            amount=request.amount,
+            status=TransactionStatus.SUCCESS,
+            description=f"Digital Rupee {request.transaction_type}",
+            metadata={
+                "transaction_type": request.transaction_type,
+                "recipient_vpa": request.recipient_vpa
+            }
+        )
+        
+        await db.transactions.insert_one(transaction.dict())
+        
+        return ServiceResponse(
+            success=True,
+            message=f"Digital Rupee {request.transaction_type} completed successfully",
+            transaction_id=transaction.transaction_id,
+            data={
+                "amount": request.amount,
+                "cbdc_balance": 5000.00,  # Mock balance
+                "upi_id": f"user@erupee"
+            }
+        )
+    except Exception as e:
+        logger.error(f"Digital Rupee error: {str(e)}")
+        return ServiceResponse(success=False, message=str(e))
+
+@api_router.post("/services/pan-card", response_model=ServiceResponse)
+async def pan_card_application(request: PANCardRequest, current_user: dict = Depends(get_current_user)):
+    """PAN Card Registration/Application"""
+    try:
+        # TODO: Integrate with NSDL/UTIITSL PAN application API
+        logger.info(f"[MOCK] PAN Card Application: {request.full_name}")
+        
+        transaction = Transaction(
+            user_id=request.user_id,
+            wallet_id="system",
+            type=TransactionType.PAN_CARD,
+            amount=107.00 if request.application_type == "new" else 50.00,  # Application fee
+            status=TransactionStatus.SUCCESS,
+            description=f"PAN card {request.application_type} application",
+            metadata={
+                "full_name": request.full_name,
+                "father_name": request.father_name,
+                "dob": request.dob,
+                "aadhaar_number": request.aadhaar_number[-4:],
+                "application_type": request.application_type
+            }
+        )
+        
+        await db.transactions.insert_one(transaction.dict())
+        
+        return ServiceResponse(
+            success=True,
+            message=f"PAN card {request.application_type} application submitted successfully",
+            transaction_id=transaction.transaction_id,
+            data={
+                "acknowledgement_number": f"ACK{uuid.uuid4().hex[:12].upper()}",
+                "application_type": request.application_type,
+                "estimated_delivery": "15-20 business days",
+                "status": "submitted"
+            }
+        )
+    except Exception as e:
+        logger.error(f"PAN card error: {str(e)}")
         return ServiceResponse(success=False, message=str(e))
 
 # ==================== SHOP & GEO-TAGGING ROUTES ====================

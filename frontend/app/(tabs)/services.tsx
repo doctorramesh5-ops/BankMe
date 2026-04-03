@@ -20,8 +20,14 @@ export default function ServicesScreen() {
   ];
 
   const handleServicePress = (service: any) => {
-    if (service.id === 'aeps') {
-      router.push('/services/aeps');
+    const routes: any = {
+      'aeps': '/services/aeps',
+      'dmt': '/services/dmt',
+      'bbps': '/services/bbps',
+    };
+    
+    if (routes[service.id]) {
+      router.push(routes[service.id]);
     } else {
       Alert.alert(service.name, `${service.description}\\n\\nDetailed flow coming soon!`);
     }

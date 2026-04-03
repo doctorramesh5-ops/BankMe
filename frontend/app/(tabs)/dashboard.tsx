@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, RefreshControl, Alert } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, RefreshControl, Alert, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { useAuthStore } from '../../store/authStore';
@@ -64,11 +64,18 @@ export default function DashboardScreen() {
       >
         {/* Header */}
         <View style={styles.header}>
-          <View>
-            <Text style={styles.greeting}>Welcome back,</Text>
-            <Text style={styles.userName}>{user?.full_name || 'User'}</Text>
-            <View style={styles.roleBadge}>
-              <Text style={styles.roleText}>{user?.role?.replace('_', ' ').toUpperCase()}</Text>
+          <View style={styles.headerLeft}>
+            <Image
+              source={require('../../assets/bankme-logo.jpeg')}
+              style={styles.headerLogo}
+              resizeMode="contain"
+            />
+            <View>
+              <Text style={styles.greeting}>Welcome back,</Text>
+              <Text style={styles.userName}>{user?.full_name || 'User'}</Text>
+              <View style={styles.roleBadge}>
+                <Text style={styles.roleText}>{user?.role?.replace('_', ' ').toUpperCase()}</Text>
+              </View>
             </View>
           </View>
           <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
@@ -161,6 +168,17 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'flex-start',
     marginBottom: 24,
+  },
+  headerLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flex: 1,
+    gap: 12,
+  },
+  headerLogo: {
+    width: 50,
+    height: 50,
+    borderRadius: 8,
   },
   greeting: {
     fontSize: 14,

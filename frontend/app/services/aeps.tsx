@@ -155,6 +155,14 @@ export default function AEPSScreen() {
                     Balance Inquiry
                   </Text>
                 </TouchableOpacity>
+                <TouchableOpacity
+                  style={[styles.radioButton, formData.transaction_type === 'mini_statement' && styles.radioButtonActive]}
+                  onPress={() => setFormData({ ...formData, transaction_type: 'mini_statement' })}
+                >
+                  <Text style={[styles.radioText, formData.transaction_type === 'mini_statement' && styles.radioTextActive]}>
+                    Mini Statement
+                  </Text>
+                </TouchableOpacity>
               </View>
             </View>
           </View>
@@ -191,6 +199,17 @@ export default function AEPSScreen() {
                   onChangeText={(text) => setFormData({ ...formData, amount: text })}
                   keyboardType="number-pad"
                 />
+              </View>
+            )}
+            
+            {formData.transaction_type !== 'withdrawal' && (
+              <View style={styles.noteContainer}>
+                <Ionicons name="information-circle" size={20} color="#6366F1" />
+                <Text style={styles.noteText}>
+                  {formData.transaction_type === 'balance_inquiry' 
+                    ? 'Balance inquiry does not require amount'
+                    : 'Mini statement will show last 5 transactions'}
+                </Text>
               </View>
             )}
           </View>
@@ -366,10 +385,12 @@ const styles = StyleSheet.create({
   },
   radioGroup: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
     gap: 12,
   },
   radioButton: {
-    flex: 1,
+    flex: 0,
+    minWidth: '30%',
     paddingVertical: 12,
     paddingHorizontal: 16,
     borderWidth: 2,
@@ -438,6 +459,20 @@ const styles = StyleSheet.create({
   amountText: {
     fontSize: 18,
     color: '#10B981',
+  },
+  noteContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+    backgroundColor: '#EEF2FF',
+    padding: 12,
+    borderRadius: 8,
+    marginTop: 8,
+  },
+  noteText: {
+    fontSize: 13,
+    color: '#6366F1',
+    flex: 1,
   },
   buttonContainer: {
     flexDirection: 'row',

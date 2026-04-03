@@ -2,8 +2,10 @@ import React from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 
 export default function ServicesScreen() {
+  const router = useRouter();
   const services = [
     { id: 'aeps', name: 'AEPS', description: 'Cash withdrawal using Aadhaar', icon: 'finger-print', color: '#10B981' },
     { id: 'dmt', name: 'Money Transfer', description: 'Send money instantly', icon: 'send', color: '#3B82F6' },
@@ -18,7 +20,11 @@ export default function ServicesScreen() {
   ];
 
   const handleServicePress = (service: any) => {
-    Alert.alert(service.name, `${service.description}\n\nThis feature is in mock mode. UI screens coming soon!`);
+    if (service.id === 'aeps') {
+      router.push('/services/aeps');
+    } else {
+      Alert.alert(service.name, `${service.description}\\n\\nDetailed flow coming soon!`);
+    }
   };
 
   return (

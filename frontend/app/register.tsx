@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView, Alert, KeyboardAvoidingView, Platform, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView, Alert, KeyboardAvoidingView, Platform, ActivityIndicator, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
@@ -75,8 +75,16 @@ export default function RegisterScreen() {
             <Ionicons name="arrow-back" size={24} color="#6366F1" />
           </TouchableOpacity>
 
+          <View style={styles.headerSection}>
+            <Image
+              source={require('../assets/bankme-logo.jpeg')}
+              style={styles.logoSmall}
+              resizeMode="contain"
+            />
+          </View>
+
           <Text style={styles.title}>Create Account</Text>
-          <Text style={styles.subtitle}>Join the financial inclusion platform</Text>
+          <Text style={styles.subtitle}>Join BANK ME - Paype Technologies</Text>
 
           <View style={styles.formContainer}>
             <View style={styles.inputContainer}>
@@ -209,6 +217,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 24,
+  },
+  headerSection: {
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+  logoSmall: {
+    width: 120,
+    height: 120,
   },
   title: {
     fontSize: 28,

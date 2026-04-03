@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform, ScrollView, Alert, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform, ScrollView, Alert, ActivityIndicator, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
@@ -56,11 +56,12 @@ export default function LoginScreen() {
       >
         <ScrollView contentContainerStyle={styles.scrollContent} keyboardShouldPersistTaps="handled">
           <View style={styles.header}>
-            <View style={styles.iconContainer}>
-              <Ionicons name="wallet" size={60} color="#6366F1" />
-            </View>
-            <Text style={styles.title}>Fintech Inclusion</Text>
-            <Text style={styles.subtitle}>Banking Services for Everyone</Text>
+            <Image
+              source={require('../assets/bankme-logo.jpeg')}
+              style={styles.logo}
+              resizeMode="contain"
+            />
+            <Text style={styles.companyName}>Paype Technologies Private Limited</Text>
           </View>
 
           <View style={styles.formContainer}>
@@ -161,14 +162,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 40,
   },
-  iconContainer: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    backgroundColor: '#EEF2FF',
-    justifyContent: 'center',
-    alignItems: 'center',
+  logo: {
+    width: 200,
+    height: 200,
     marginBottom: 16,
+  },
+  companyName: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#6B7280',
+    textAlign: 'center',
   },
   title: {
     fontSize: 32,

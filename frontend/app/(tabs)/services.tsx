@@ -10,7 +10,7 @@ export default function ServicesScreen() {
     { id: 'bbps', name: 'Bill Payments', description: 'Pay all your bills', icon: 'receipt', color: '#F59E0B' },
     { id: 'demat', name: 'Demat Account', description: 'Open trading account', icon: 'trending-up', color: '#8B5CF6' },
     { id: 'mutual_fund', name: 'Mutual Funds', description: 'Invest in mutual funds', icon: 'analytics', color: '#EC4899' },
-    { id: 'digital_rupee', name: 'Digital Rupee', description: 'CBDC transactions', icon: 'logo-bitcoin', color: '#14B8A6' },
+    { id: 'digital_rupee', name: 'Digital Rupee', description: 'CBDC transactions', icon: 'cash', color: '#14B8A6' },
     { id: 'pan_card', name: 'PAN Card', description: 'Apply for new PAN', icon: 'card-outline', color: '#F59E0B' },
     { id: 'irctc', name: 'Train Booking', description: 'Book train tickets', icon: 'train', color: '#EF4444' },
     { id: 'bus', name: 'Bus Booking', description: 'Book bus tickets', icon: 'bus', color: '#8B5CF6' },

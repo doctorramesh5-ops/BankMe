@@ -1,0 +1,65 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    compileSdk 35
+    namespace 'co.bankme.app'
+
+    defaultConfig {
+        applicationId "co.bankme.app"
+        minSdk 21
+        targetSdk 35
+        versionCode 2
+        versionName "2.0.0"
+        multiDexEnabled true
+    }
+
+    signingConfigs {
+        release {
+            storeFile file('bankme-upload-key.jks')
+            storePassword System.getenv("KEYSTORE_PASSWORD") ?: 'YOUR_STORE_PASSWORD'
+            keyAlias 'bankme-key'
+            keyPassword System.getenv("KEY_PASSWORD") ?: 'YOUR_KEY_PASSWORD'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            applicationIdSuffix ".debug"
+            debuggable true
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+
+    bundle {
+        language {
+            enableSplit = false
+        }
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.core:core-ktx:1.13.1'
+    implementation 'com.google.android.material:material:1.12.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation 'androidx.webkit:webkit:1.8.0'
+}

@@ -249,28 +249,40 @@ export default function HistoryScreen({navigation}: any) {
     );
   };
 
-  // ── Reusable chip row ──
-  const ChipRow = ({items, active, onPick}: {
+  // ── Reusable labeled filter box (card style, like the summary bar) ──
+  const FilterBox = ({label, items, active, onPick}: {
+    label: string;
     items: {key: string; label: string}[];
     active: string;
     onPick: (k: string) => void;
   }) => (
-    <ScrollView horizontal showsHorizontalScrollIndicator={false}
-      contentContainerStyle={{paddingHorizontal: 20, gap: 8}}
-      style={{marginBottom: 10, flexGrow: 0}}>
-      {items.map(it => (
-        <TouchableOpacity key={it.key} onPress={() => onPick(it.key)}
-          style={{paddingHorizontal: 14, paddingVertical: 8,
-            borderRadius: 100, borderWidth: 1,
-            borderColor: active === it.key ? theme.primary : theme.border,
-            backgroundColor: active === it.key ? theme.primary : theme.card}}>
-          <Text style={{fontSize: 12, fontWeight: '700',
-            color: active === it.key ? '#000' : theme.muted2}}>
-            {it.label}
-          </Text>
-        </TouchableOpacity>
-      ))}
-    </ScrollView>
+    <View style={{marginHorizontal: 20, marginBottom: 10,
+      backgroundColor: theme.card, borderRadius: 12,
+      borderWidth: 1, borderColor: theme.border,
+      paddingVertical: 10}}>
+      <Text style={{color: theme.muted2, fontSize: 11, fontWeight: '800',
+        textTransform: 'uppercase', letterSpacing: 0.5,
+        paddingHorizontal: 14, marginBottom: 8}}>
+        {label}
+      </Text>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false}
+        contentContainerStyle={{paddingHorizontal: 14, gap: 8,
+          alignItems: 'center'}}>
+        {items.map(it => (
+          <TouchableOpacity key={it.key} onPress={() => onPick(it.key)}
+            style={{paddingHorizontal: 14, height: 36,
+              justifyContent: 'center',
+              borderRadius: 100, borderWidth: 1,
+              borderColor: active === it.key ? theme.primary : theme.border,
+              backgroundColor: active === it.key ? theme.primary : theme.bg}}>
+            <Text style={{fontSize: 12, fontWeight: '700',
+              color: active === it.key ? '#000' : theme.muted2}}>
+              {it.label}
+            </Text>
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
+    </View>
   );
 
   return (
@@ -282,27 +294,31 @@ export default function HistoryScreen({navigation}: any) {
           📊 Transaction History
         </Text>
       </View>
+      {/* NOTE: filter boxes + summary render above; list scrolls below them */}
 
-      {/* ── Row 1: Services ── */}
-      <ChipRow
+      {/* ── Box 1: Services ── */}
+      <FilterBox
+        label="Services"
         items={[{key: 'all', label: 'All'},
           ...SERVICES.map(s => ({key: s.id, label: s.icon + ' ' + s.label}))]}
         active={service}
         onPick={pickService}
       />
 
-      {/* ── Row 2: Sub-sections (only when a service is chosen) ── */}
+      {/* ── Box 2: Sub-services (only when a service is chosen) ── */}
       {currentSubs.length > 0 && (
-        <ChipRow
-          items={[{key: 'all', label: 'All ' + serviceMeta(service).label},
+        <FilterBox
+          label={serviceMeta(service).label + ' Types'}
+          items={[{key: 'all', label: 'All'},
             ...currentSubs.map(s => ({key: s.id, label: s.label}))]}
           active={subType}
           onPick={setSubType}
         />
       )}
 
-      {/* ── Row 3: Time filters ── */}
-      <ChipRow
+      {/* ── Box 3: Time period ── */}
+      <FilterBox
+        label="Time Period"
         items={TIME_FILTERS.map(t => ({key: t.key, label: t.label}))}
         active={time}
         onPick={k => setTime(k as TimeKey)}

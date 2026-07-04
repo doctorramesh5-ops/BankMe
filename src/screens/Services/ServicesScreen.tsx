@@ -15,11 +15,11 @@ type Service = {
 
 const SERVICES: Service[] = [
   {id: 'aeps',       name: 'AEPS',           icon: '👆', color: '#10b981', desc: 'Aadhaar Banking',     cat: 'banking',    screen: 'AEPS'},
-  {id: 'upicashin',  name: 'UPI Cash In',    icon: '⬇️', color: '#10b981', desc: 'Collect UPI Payment', cat: 'banking'},
-  {id: 'upicashout', name: 'UPI Cash Out',   icon: '⬆️', color: '#ef4444', desc: 'Send via UPI',        cat: 'banking'},
+  {id: 'upicashin',  name: 'UPI Cash In',    icon: '⬇️', color: '#10b981', desc: 'Collect UPI Payment', cat: 'banking',    screen: 'UPI'},
+  {id: 'upicashout', name: 'UPI Cash Out',   icon: '⬆️', color: '#ef4444', desc: 'Send via UPI',        cat: 'banking',    screen: 'UPI'},
   {id: 'dmt',        name: 'Money Transfer', icon: '💸', color: '#3b82f6', desc: 'Domestic Transfer',   cat: 'banking',    screen: 'DMT'},
   {id: 'bbps',       name: 'Bill Pay',       icon: '🧾', color: '#f59e0b', desc: 'Utility Bills',       cat: 'banking',    screen: 'BBPS'},
-  {id: 'erupee',     name: 'eRupee',         icon: '₹',  color: '#14b8a6', desc: 'Digital CBDC',        cat: 'banking'},
+  {id: 'erupee',     name: 'eRupee',         icon: '₹',  color: '#14b8a6', desc: 'Digital CBDC',        cat: 'banking',    screen: 'ERupee'},
   {id: 'demat',      name: 'Demat',          icon: '📈', color: '#8b5cf6', desc: 'Demat Account',       cat: 'investment'},
   {id: 'mutualfund', name: 'Mutual Fund',    icon: '📊', color: '#ec4899', desc: 'Invest in Funds',     cat: 'investment'},
   {id: 'train',      name: 'Train',          icon: '🚂', color: '#ef4444', desc: 'IRCTC Booking',       cat: 'travel'},

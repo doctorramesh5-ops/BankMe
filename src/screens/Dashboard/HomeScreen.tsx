@@ -10,17 +10,14 @@ const SVCS = [
   {id:'aeps',   name:'AEPS',     icon:'👆', color:'#10b981'},
   {id:'dmt',    name:'Transfer', icon:'💸', color:'#3b82f6'},
   {id:'bbps',   name:'Bills',    icon:'🧾', color:'#f59e0b', screen:'BBPS'},
-  {id:'upi',    name:'UPI',      icon:'📲', color:'#6366f1'},
-  {id:'cashin', name:'Cash In',  icon:'💵', color:'#22c55e'},
-  {id:'cashout',name:'Cash Out', icon:'💴', color:'#f43f5e'},
+  {id:'upi',    name:'UPI',      icon:'📲', color:'#6366f1', screen:'UPI'},
+  {id:'erupee', name:'eRupee',   icon:'🏛️', color:'#14b8a6', screen:'ERupee'},
   {id:'creditcard',name:'Card',  icon:'💳', color:'#8b5cf6'},
   {id:'insurance',name:'Insure', icon:'🛡️', color:'#06b6d4'},
 ];
 
 // Maps service id → stack screen name (only screens that exist get a route)
-const SCREEN_MAP:any = {aeps:'AEPS', dmt:'DMT'};
-
-// Role badge colours
+const SCREEN_MAP:any = {aeps:'AEPS', dmt:'DMT', bbps:'BBPS', upi:'UPI', cashin:'UPI', cashout:'UPI'};
 const ROLE_COLOR:any = {
   admin:'#ef4444', whitelabel:'#8b5cf6', superdist:'#f59e0b',
   distributor:'#06b6d4', retailer:'#10b981', customer:'#3b82f6',

@@ -19,6 +19,8 @@ import AEPSScreen from '../screens/Services/AEPSScreen';
 import DMTScreen from '../screens/Services/DMTScreen';
 import HistoryScreen from '../screens/History/HistoryScreen';
 import BBPSScreen from '../screens/Services/BBPSScreen';
+import UPIScreen from '../screens/Services/UPIScreen';
+import ERupeeScreen from '../screens/Services/ERupeeScreen';
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -91,7 +93,12 @@ export default function RootNavigation() {
               options={{animation:'slide_from_right'}}/>
             <Stack.Screen name='BBPS' component={BBPSScreen}
               options={{animation:'slide_from_right'}}/>
-          </>
+           <Stack.Screen name='UPI' component={UPIScreen}
+              options={{animation:'slide_from_right'}}/>
+            <Stack.Screen name='ERupee' component={ERupeeScreen}
+              options={{animation:'slide_from_right'}}/>
+      </>
+          
         ):(
           <>
             <Stack.Screen name='Splash' component={SplashScreen} options={{animation:'fade'}}/>

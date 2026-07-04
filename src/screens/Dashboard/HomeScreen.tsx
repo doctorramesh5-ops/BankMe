@@ -14,6 +14,7 @@ const SVCS = [
   {id:'erupee', name:'eRupee',   icon:'🏛️', color:'#14b8a6', screen:'ERupee'},
   {id:'creditcard',name:'Card',  icon:'💳', color:'#8b5cf6'},
   {id:'insurance',name:'Insure', icon:'🛡️', color:'#06b6d4'},
+  {id:'travel', name:'Travel',   icon:'✈️', color:'#6366f1'},
 ];
 
 // Maps service id → stack screen name (only screens that exist get a route)

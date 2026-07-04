@@ -91,8 +91,8 @@ export default function ServicesScreen({navigation}: any) {
                     style={{width: '33.33%', padding: 6}}>
                     <View style={{backgroundColor: theme.card, borderRadius: 14,
                       borderWidth: 1, borderColor: s.color + '30',
-                      paddingVertical: 16, paddingHorizontal: 8,
-                      alignItems: 'center'}}>
+                      height: 104, paddingHorizontal: 8,
+                      alignItems: 'center', justifyContent: 'center'}}>
                       <Text style={{fontSize: 26, marginBottom: 6}}>{s.icon}</Text>
                       <Text numberOfLines={1}
                         style={{fontSize: 12, fontWeight: '800', color: s.color}}>

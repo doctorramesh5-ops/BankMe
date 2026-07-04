@@ -9,7 +9,7 @@ import {useTheme} from '../../theme/ThemeContext';
 const SVCS = [
   {id:'aeps',   name:'AEPS',     icon:'👆', color:'#10b981'},
   {id:'dmt',    name:'Transfer', icon:'💸', color:'#3b82f6'},
-  {id:'bbps',   name:'Bills',    icon:'🧾', color:'#f59e0b'},
+  {id:'bbps',   name:'Bills',    icon:'🧾', color:'#f59e0b', screen:'BBPS'},
   {id:'upi',    name:'UPI',      icon:'📲', color:'#6366f1'},
   {id:'cashin', name:'Cash In',  icon:'💵', color:'#22c55e'},
   {id:'cashout',name:'Cash Out', icon:'💴', color:'#f43f5e'},

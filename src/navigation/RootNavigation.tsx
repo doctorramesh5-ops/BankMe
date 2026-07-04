@@ -18,6 +18,7 @@ import ProfileScreen from '../screens/Profile/ProfileScreen';
 import AEPSScreen from '../screens/Services/AEPSScreen';
 import DMTScreen from '../screens/Services/DMTScreen';
 import HistoryScreen from '../screens/History/HistoryScreen';
+import BBPSScreen from '../screens/Services/BBPSScreen';
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -87,7 +88,9 @@ export default function RootNavigation() {
             <Stack.Screen name='AEPS' component={AEPSScreen}
               options={{animation:'slide_from_right',gestureEnabled:true,gestureDirection:'horizontal'}}/>
             <Stack.Screen name='DMT' component={DMTScreen}
-              options={{animation:'slide_from_right',gestureEnabled:true,gestureDirection:'horizontal'}}/>
+              options={{animation:'slide_from_right'}}/>
+            <Stack.Screen name='BBPS' component={BBPSScreen}
+              options={{animation:'slide_from_right'}}/>
           </>
         ):(
           <>

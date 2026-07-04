@@ -17,7 +17,7 @@ import WalletScreen from '../screens/Wallet/WalletScreen';
 import ProfileScreen from '../screens/Profile/ProfileScreen';
 import AEPSScreen from '../screens/Services/AEPSScreen';
 import DMTScreen from '../screens/Services/DMTScreen';
-
+import HistoryScreen from '../screens/History/HistoryScreen';
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -58,7 +58,7 @@ function MainTabs() {
         options={{tabBarIcon:({focused,color})=><TabIcon icon='🏠' label='Home' focused={focused} color={color}/>}}/>
       <Tab.Screen name='Services' component={ServicesScreen}
         options={{tabBarIcon:({focused,color})=><TabIcon icon='⚡' label='Services' focused={focused} color={color}/>}}/>
-      <Tab.Screen name='History' component={TransactionsScreen}
+      <Tab.Screen name='History' component={HistoryScreen}
         options={{tabBarIcon:({focused,color})=><TabIcon icon='📊' label='History' focused={focused} color={color}/>}}/>
       <Tab.Screen name='Wallet' component={WalletScreen}
         options={{tabBarIcon:({focused,color})=><TabIcon icon='💰' label='Wallet' focused={focused} color={color}/>}}/>

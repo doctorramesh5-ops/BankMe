@@ -28,6 +28,11 @@ const SERVICES: {id: string; icon: string; label: string; subs: {id: string; lab
     {id: 'withdrawal', label: 'Withdrawal'},
     {id: 'balance', label: 'Balance Enquiry'},
     {id: 'ministmt', label: 'Mini Statement'},
+    {id: 'aadhaarpay', label: 'Aadhaar Pay'},
+  ]},
+  {id: 'matm', icon: '🏧', label: 'Micro ATM', subs: [
+    {id: 'withdrawal', label: 'Withdrawal'},
+    {id: 'balance', label: 'Balance'},
   ]},
   {id: 'dmt', icon: '💸', label: 'DMT', subs: [
     {id: 'imps', label: 'IMPS'},
@@ -37,20 +42,38 @@ const SERVICES: {id: string; icon: string; label: string; subs: {id: string; lab
     {id: 'electricity', label: 'Electricity'},
     {id: 'water', label: 'Water'},
     {id: 'gas', label: 'Gas'},
+    {id: 'lpg', label: 'LPG Booking'},
     {id: 'dth', label: 'DTH'},
+    {id: 'broadband', label: 'Broadband'},
+    {id: 'creditcard', label: 'Credit Card Bill'},
   ]},
   {id: 'recharge', icon: '📱', label: 'Recharge', subs: [
     {id: 'prepaid', label: 'Prepaid'},
     {id: 'postpaid', label: 'Postpaid'},
   ]},
   {id: 'upi', icon: '🔗', label: 'UPI', subs: [
-    {id: 'collect', label: 'Collect'},
     {id: 'pay', label: 'Pay'},
+    {id: 'collect', label: 'Collect'},
+    {id: 'qr', label: 'QR Payment'},
+  ]},
+  {id: 'pan', icon: '🪪', label: 'PAN Card', subs: [
+    {id: 'newpan', label: 'New PAN'},
+    {id: 'correction', label: 'Correction'},
+  ]},
+  {id: 'insurance', icon: '🛡️', label: 'Insurance', subs: [
+    {id: 'life', label: 'Life'},
+    {id: 'health', label: 'Health'},
+    {id: 'vehicle', label: 'Vehicle'},
+  ]},
+  {id: 'fastag', icon: '🚗', label: 'FASTag', subs: [
+    {id: 'newtag', label: 'New Tag'},
+    {id: 'recharge', label: 'Recharge'},
   ]},
   {id: 'wallet', icon: '👛', label: 'Wallet', subs: [
     {id: 'topup', label: 'Top-up'},
     {id: 'withdraw', label: 'Withdraw'},
     {id: 'commission', label: 'Commission'},
+    {id: 'refund', label: 'Refund'},
   ]},
 ];
 

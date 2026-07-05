@@ -18,7 +18,7 @@ const SVCS = [
 ];
 
 // Maps service id → stack screen name (only screens that exist get a route)
-const SCREEN_MAP:any = {aeps:'AEPS', dmt:'DMT', bbps:'BBPS', upi:'UPI', cashin:'UPI', cashout:'UPI'};
+const SCREEN_MAP:any = {aeps:'AEPS', dmt:'DMT', bbps:'BBPS', upi:'UPI', erupee:'ERupee'};
 const ROLE_COLOR:any = {
   admin:'#ef4444', whitelabel:'#8b5cf6', superdist:'#f59e0b',
   distributor:'#06b6d4', retailer:'#10b981', customer:'#3b82f6',

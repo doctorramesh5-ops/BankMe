@@ -7,6 +7,11 @@ import {
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useSelector,useDispatch} from 'react-redux';
 import {RootState} from '../../store';
+import {logout} from '../../store/authSlice';
+import ReactNativeBiometrics from 'react-native-biometrics';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const rnBiometrics = new ReactNativeBiometrics();
 import {useTheme} from '../../theme/ThemeContext';
 import QRCode from 'react-native-qrcode-svg';
 import {launchCamera,launchImageLibrary} from 'react-native-image-picker';
@@ -42,6 +47,7 @@ function getDistanceMeters(
 export default function ProfileScreen({navigation}:any){
   const {theme} = useTheme();
   const user    = useSelector((s:RootState)=>s.auth.user);
+  const dispatch = useDispatch();
 
   // ── Profile photo ──
   const [photoUri,setPhotoUri]   = useState<string|null>(null);
@@ -84,6 +90,26 @@ export default function ProfileScreen({navigation}:any){
 
   // ── Active section ──
   const [activeSection,setActiveSection] = useState('personal');
+
+  // ── Biometric (fingerprint) toggle ──
+  const [bioEnabled, setBioEnabled] = useState(false);
+  useEffect(() => {
+    AsyncStorage.getItem('biometric_enabled').then(v => setBioEnabled(v === 'yes'));
+  }, []);
+  const toggleBiometric = async () => {
+    if (!bioEnabled) {
+      const {available} = await rnBiometrics.isSensorAvailable();
+      if (!available) return Alert.alert('Not Available', 'No fingerprint sensor found on this device.');
+      await AsyncStorage.setItem('biometric_enabled', 'yes');
+      await AsyncStorage.setItem('biometric_phone', user?.phone || user?.mobile || '');
+      setBioEnabled(true);
+      Alert.alert('✅ Enabled', 'Fingerprint login is now ON. Next time, just scan your finger!');
+    } else {
+      await AsyncStorage.removeItem('biometric_enabled');
+      setBioEnabled(false);
+      Alert.alert('Disabled', 'Fingerprint login turned off.');
+    }
+  };
 
   // ── Check location on mount ──
   useEffect(()=>{
@@ -962,6 +988,45 @@ export default function ProfileScreen({navigation}:any){
           )}
 
         </View>
+
+          {/* ── FINGERPRINT TOGGLE ── */}
+          <TouchableOpacity
+            onPress={toggleBiometric}
+            style={{marginHorizontal:20, marginTop:8, marginBottom:8,
+              backgroundColor:theme.card, borderWidth:1,
+              borderColor:bioEnabled?theme.primary:theme.border, borderRadius:14,
+              paddingVertical:16, paddingHorizontal:16, flexDirection:'row',
+              alignItems:'center'}}>
+            <Text style={{fontSize:22, marginRight:12}}>🔐</Text>
+            <View style={{flex:1}}>
+              <Text style={{color:theme.text, fontWeight:'800', fontSize:14}}>
+                Fingerprint Login
+              </Text>
+              <Text style={{color:theme.muted2, fontSize:11}}>
+                {bioEnabled ? 'Enabled · scan finger to log in' : 'Tap to enable quick login'}
+              </Text>
+            </View>
+            <View style={{width:48, height:28, borderRadius:14,
+              backgroundColor:bioEnabled?theme.primary:theme.border,
+              justifyContent:'center', paddingHorizontal:3,
+              alignItems:bioEnabled?'flex-end':'flex-start'}}>
+              <View style={{width:22, height:22, borderRadius:11,
+                backgroundColor:'#fff'}} />
+            </View>
+          </TouchableOpacity>
+
+          {/* ── LOGOUT BUTTON ── */}
+          <TouchableOpacity
+            onPress={() => dispatch(logout())}
+            style={{marginHorizontal:20, marginTop:8, marginBottom:30,
+              backgroundColor:'rgba(239,68,68,0.1)', borderWidth:1,
+              borderColor:'rgba(239,68,68,0.4)', borderRadius:14,
+              paddingVertical:16, alignItems:'center'}}>
+            <Text style={{color:'#ef4444', fontWeight:'800', fontSize:15}}>
+              🚪 Logout
+            </Text>
+          </TouchableOpacity>
+
       </ScrollView>
 
       {/* ── PHOTO PICKER MODAL ── */}

@@ -10,6 +10,7 @@ import {View,Text,Platform} from 'react-native';
 import SplashScreen from '../screens/Auth/SplashScreen';
 import OnboardingScreen from '../screens/Auth/OnboardingScreen';
 import LoginScreen from '../screens/Auth/LoginScreen';
+import EKYCScreen from '../screens/Auth/EKYCScreen';
 import HomeScreen from '../screens/Dashboard/HomeScreen';
 import ServicesScreen from '../screens/Services/ServicesScreen';
 import TransactionsScreen from '../screens/Transactions/TransactionsScreen';
@@ -79,11 +80,17 @@ function MainTabs() {
 }
 
 export default function RootNavigation() {
-  const {isAuthenticated} = useSelector((s:RootState)=>s.auth);
+const {isAuthenticated, user} = useSelector((s:RootState)=>s.auth);
+  const needsKyc = isAuthenticated && user?.kyc !== 'verified';
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown:false}}>
-        {isAuthenticated?(
+        {needsKyc?(
+          <>
+            <Stack.Screen name='EKYC' component={EKYCScreen}
+              options={{animation:'slide_from_right'}}/>
+          </>
+        ):isAuthenticated?(
           <>
             <Stack.Screen name='Main' component={MainTabs}
               options={{animation:'fade'}}/>

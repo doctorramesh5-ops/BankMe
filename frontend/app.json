@@ -1,0 +1,45 @@
+{
+  "expo": {
+    "name": "BANK ME - Paype Technologies",
+    "slug": "bankme-fintech",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "bankme",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "description": "Comprehensive fintech inclusion platform by Paype Technologies Private Limited",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.paypetech.bankme"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#6366F1"
+      },
+      "package": "com.paypetech.bankme",
+      "edgeToEdgeEnabled": true
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/images/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/splash-icon.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#000"
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}

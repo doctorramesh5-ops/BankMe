@@ -8,6 +8,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../store';
 import {useTheme} from '../../theme/ThemeContext';
+import BankMeLogo from '../../components/BankMeLogo';
 
 // ── POPULAR BANKS ─────────────────────────────────────────
 const BANKS = [
@@ -287,17 +288,7 @@ Powered by BankMe · RTAI Secured`;
 
         {/* BankMe logo header */}
         <View style={{alignItems:'center',marginBottom:20,marginTop:8}}>
-          <View style={{width:70,height:70,borderRadius:35,
-            backgroundColor:'#00d4aa',alignItems:'center',
-            justifyContent:'center',marginBottom:8,
-            elevation:4,shadowColor:'#000',
-            shadowOffset:{width:0,height:2},
-            shadowOpacity:0.15,shadowRadius:4}}>
-            <Text style={{fontSize:32,fontWeight:'900',color:'#000'}}>B</Text>
-          </View>
-          <Text style={{fontSize:18,fontWeight:'900',color:theme.text,letterSpacing:1}}>
-            BANK ME
-          </Text>
+          <BankMeLogo size={64} variant="card" showText />
           <Text style={{fontSize:11,color:theme.muted2,marginBottom:12}}>
             Powered by RTAI · Complete Fintech Platform
           </Text>

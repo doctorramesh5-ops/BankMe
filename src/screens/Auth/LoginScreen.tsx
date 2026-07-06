@@ -8,6 +8,7 @@ import {useDispatch} from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {setUser} from '../../store/authSlice';
 import {useTheme} from '../../theme/ThemeContext';
+import BankMeLogo from '../../components/BankMeLogo';
 
 // ── Login + Signup — matching bankme.co.in web flow ──
 // Sign In: OTP  or  PIN  |  Sign Up: 3 roles + verified mobile & email
@@ -235,13 +236,7 @@ export default function LoginScreen({navigation}: any) {
 
           {/* Logo */}
           <View style={{alignItems: 'center', marginTop: 20, marginBottom: 24}}>
-            <View style={{width: 64, height: 64, borderRadius: 18,
-              backgroundColor: theme.primary, alignItems: 'center',
-              justifyContent: 'center', marginBottom: 12}}>
-              <Text style={{fontSize: 32, fontWeight: '900', color: '#000'}}>B</Text>
-            </View>
-            <Text style={{fontSize: 24, fontWeight: '900', color: theme.text,
-              letterSpacing: 1}}>BANK ME</Text>
+            <BankMeLogo size={90} variant="card" showText textColor="#00d4aa" />
             <Text style={{fontSize: 12, color: theme.primary, fontWeight: '600',
               marginTop: 4}}>🛡️ RTAI Secured · RBI Compliant</Text>
           </View>

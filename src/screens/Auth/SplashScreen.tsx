@@ -1,6 +1,7 @@
 import React, {useEffect,useRef} from "react";
 import {View,Text,StyleSheet,StatusBar,Animated} from "react-native";
 import {useTheme} from "../../theme/ThemeContext";
+import BankMeLogo from "../../components/BankMeLogo";
 export default function SplashScreen({navigation}:any) {
   const {theme} = useTheme();
   const scale = useRef(new Animated.Value(0)).current;
@@ -17,8 +18,8 @@ export default function SplashScreen({navigation}:any) {
     <View style={{flex:1,backgroundColor:theme.bg,alignItems:"center",justifyContent:"center"}}>
       <StatusBar barStyle={theme.statusBar} backgroundColor={theme.bg}/>
       <Animated.View style={{alignItems:"center",opacity,transform:[{scale}]}}>
-        <View style={{width:120,height:120,borderRadius:30,borderWidth:2,borderColor:theme.primary+"40",backgroundColor:theme.primary+"18",alignItems:"center",justifyContent:"center",marginBottom:24}}>
-          <Text style={{fontSize:60}}>🏦</Text>
+        <View style={{marginBottom:24}}>
+          <BankMeLogo size={110} variant="card" />
         </View>
         <Text style={{fontSize:42,fontWeight:"900",color:theme.primary,letterSpacing:2,marginBottom:8}}>BankMe</Text>
         <Text style={{fontSize:14,color:theme.muted2,letterSpacing:1}}>Powered by RTAI</Text>

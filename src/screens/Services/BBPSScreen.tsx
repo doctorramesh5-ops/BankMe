@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useTheme} from '../../theme/ThemeContext';
+import BankMeLogo from '../../components/BankMeLogo';
 import {BBPS_CATEGORIES, BBPS_BILLERS, BBPSCategory} from '../../data/bbpsData';
 
 // ── Simulated bill (replace with real BBPS API later) ──
@@ -103,13 +104,7 @@ export default function BBPSScreen({navigation}: any) {
         <StatusBar barStyle={theme.statusBar} backgroundColor={theme.bg} />
         <ScrollView contentContainerStyle={{padding: 20, paddingBottom: 100,
           alignItems: 'center'}}>
-          <View style={{width: 70, height: 70, borderRadius: 35,
-            backgroundColor: theme.primary, alignItems: 'center',
-            justifyContent: 'center', marginBottom: 8, marginTop: 8}}>
-            <Text style={{fontSize: 32, fontWeight: '900', color: '#000'}}>B</Text>
-          </View>
-          <Text style={{fontSize: 18, fontWeight: '900', color: theme.text,
-            letterSpacing: 1}}>BANK ME</Text>
+          <BankMeLogo size={64} variant="card" showText />
           <Text style={{fontSize: 11, color: theme.muted2, marginBottom: 16}}>
             Powered by RTAI · Complete Fintech Platform
           </Text>

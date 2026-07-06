@@ -6,6 +6,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../store';
 import {useTheme} from '../../theme/ThemeContext';
+import BankMeLogo from '../../components/BankMeLogo';
 import QRCode from 'react-native-qrcode-svg';
 
 // ── e₹ Digital Rupee (RBI CBDC) — matching bankme.co.in web flow ──
@@ -186,6 +187,8 @@ export default function ERupeeScreen({navigation}: any) {
 
         {tab === 'send' && sent && (
           <View style={[card, {alignItems: 'center'}]}>
+            <BankMeLogo size={54} variant="card" showText />
+            <View style={{height: 12}} />
             <View style={{width: 80, height: 80, borderRadius: 40,
               backgroundColor: 'rgba(20,184,166,0.15)', alignItems: 'center',
               justifyContent: 'center', marginBottom: 12}}>

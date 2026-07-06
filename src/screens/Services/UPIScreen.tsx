@@ -7,6 +7,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../store';
 import {useTheme} from '../../theme/ThemeContext';
+import BankMeLogo from '../../components/BankMeLogo';
 import QRCode from 'react-native-qrcode-svg';
 
 // ── UPI Cash In / Cash Out — matching bankme.co.in web flow ──
@@ -274,6 +275,8 @@ export default function UPIScreen({navigation}: any) {
         {/* ── Cash Out: success ── */}
         {mode === 'cashout' && coDone && (
           <View style={[card, {alignItems: 'center'}]}>
+            <BankMeLogo size={54} variant="card" showText />
+            <View style={{height: 12}} />
             <View style={{width: 80, height: 80, borderRadius: 40,
               backgroundColor: 'rgba(16,185,129,0.15)', alignItems: 'center',
               justifyContent: 'center', marginBottom: 12}}>

@@ -9,6 +9,7 @@ import {RootState} from '../../store';
 import {useTheme} from '../../theme/ThemeContext';
 import {launchImageLibrary} from 'react-native-image-picker';
 import RazorpayCheckout from 'react-native-razorpay';
+import SoundPlayer from 'react-native-sound-player';
 
 // PASTE YOUR KEY ID BELOW (starts with rzp_test_). NEVER the Key Secret!
 const RAZORPAY_KEY_ID = 'rzp_test_Si0eHtBmBboiVW';
@@ -105,6 +106,7 @@ export default function WalletScreen({navigation}: any) {
 
     RazorpayCheckout.open(options)
       .then((data: any) => {
+        try { SoundPlayer.playSoundFile('coin', 'mp3'); } catch (e) {}
         // TODO: send data.razorpay_payment_id to backend for signature
         // verification, then credit wallet from the server response
         Alert.alert('\u2705 Payment Successful',

@@ -1,4 +1,4 @@
-package com.bankme
+package `in`.bankme.app
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
